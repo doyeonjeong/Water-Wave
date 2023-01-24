@@ -37,7 +37,11 @@ class ViewController: UIViewController {
             self.waterWaveView.progress += dr
             self.waterWaveView.setupProgress(self.waterWaveView.progress)
             
-            print(self.waterWaveView.progress)
+            // 타이머 종료후에도 출렁거리는 애니메이션을 노출할 수 있도록 설정
+            if self.waterWaveView.progress >= 0.95 {
+                self.timer?.invalidate()
+                self.timer = nil
+            }
         })
     }
 
