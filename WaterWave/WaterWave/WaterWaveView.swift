@@ -130,5 +130,29 @@ extension WaterWaveView {
         firstLayer.fillColor = firstColor.cgColor
         firstLayer.path = bezier.cgPath
         firstLayer.add(anim, forKey: nil)
+        
+        if !showSingleWave {
+            let bezier = UIBezierPath()
+            
+            let startOffsetY = waveHeight * CGFloat(sinf(Float(offset * twon / w)))
+            var originOffsetY: CGFloat = 0.0
+            
+            bezier.move(to: CGPoint(x: 0.0, y: startOffsetY))
+            
+            for i in stride(from: 0.0, to: w * 1000, by: 1) {
+                originOffsetY = waveHeight * CGFloat(cosf(Float(twon / w * i + offset * twon / w)))
+                bezier.addLine(to: CGPoint(x: i, y: originOffsetY))
+            }
+            
+            bezier.addLine(to: CGPoint(x: w * 1000, y: originOffsetY))
+            bezier.addLine(to: CGPoint(x: w * 1000, y: h))
+            bezier.addLine(to: CGPoint(x: 0.0, y: h))
+            bezier.addLine(to: CGPoint(x: 0.0, y: startOffsetY))
+            bezier.close()
+            
+            secondLayer.fillColor = secondColor.cgColor
+            secondLayer.path = bezier.cgPath
+            secondLayer.add(anim, forKey: nil)
+        }
     }
 }
