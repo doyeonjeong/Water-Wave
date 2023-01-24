@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(waterWaveView)
+        waterWaveView.setupProgress(waterWaveView.progress)
         
         NSLayoutConstraint.activate([
             waterWaveView.widthAnchor.constraint(equalToConstant: screenWidth * 0.5),
