@@ -13,6 +13,8 @@ class WaterWaveView: UIView {
     private let firstLayer = CAShapeLayer()
     private let secondLayer = CAShapeLayer()
     
+    private let percentLbl = UILabel()
+    
     private var firstColor: UIColor = .clear
     private var secondColor: UIColor = .clear
     
@@ -61,6 +63,8 @@ extension WaterWaveView {
         if !showSingleWave {
             createSecondLayer()
         }
+        
+        createPercentLbl()
     }
     
     private func createFirstLayer() {
@@ -75,6 +79,17 @@ extension WaterWaveView {
         secondLayer.anchorPoint = .zero
         secondLayer.fillColor = secondColor.cgColor
         layer.addSublayer(secondLayer)
+    }
+    
+    private func createPercentLbl() {
+        percentLbl.font = UIFont.boldSystemFont(ofSize: 35.0)
+        percentLbl.textAlignment = .center
+        percentLbl.text = "99%"
+        percentLbl.textColor = .darkGray
+        addSubview(percentLbl)
+        percentLbl.translatesAutoresizingMaskIntoConstraints = false
+        percentLbl.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        percentLbl.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
     func setupProgress(_ pr: CGFloat) {
